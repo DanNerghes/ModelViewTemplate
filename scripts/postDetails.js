@@ -54,27 +54,33 @@ class PostDetailsView {
                 const h = document.createElement('h5');
                 const p = document.createElement('p');
 
-                h.innerText = comment.email;
+                h.innerText = comment.email + " :";
                 i.innerText ='"' +  comment.body + '"';
 
                 p.append(i);
                 fragment.append(h, p);
             }
             
-            const comm = document.querySelector('[data-post="comments"]');
+            this.appendComments(fragment)
 
-            comm.append(fragment);
         });
+    }
+
+    appendComments(fragment) {
+        const comments = document.querySelector('[data-post="comments"]');
+
+        comments.append(fragment);
     }
 
     handleCommentFormSubmit(e) {
         e.preventDefault();
         // logica de add comment
 
-        const comment = document.querySelector("#comment").value;
+        const comment = document.querySelector("[data-comment]").value;
         const email = "dan.nerghes$gmail.com";
         
-        this.commentsModel.createComment(comment, email).then(data => console.log(data));
+        this.commentsModel.createComment(comment, email)
+        .then(console.log);
         // pentru aplicatia noastra vom transmite intotdeauna id 1 pentru user
     }
 }
